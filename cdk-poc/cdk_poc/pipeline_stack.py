@@ -14,17 +14,17 @@ class PipelineStack(Stack):
         
 
         pipeline =  CodePipeline(self, "Pipeline", 
-                        pipeline_name="MyPipeline",
-                        synth=ShellStep("Synth", 
-                            input=CodePipelineSource.git_hub(
-                                "mvlbarcelos/poc-aws-lambda", 
-                                "setup",
-                                authentication=SecretValue.secrets_manager("github")
-                            ),
-                            commands=[
-                                "npm install -g aws-cdk",
-                                "python -m pip install -r cdk-poc/requirements.txt",
-                                "cdk synth"
-                            ]
-                        )
-                    )
+            pipeline_name="POCPipeline",
+            synth=ShellStep("Synth", 
+                input=CodePipelineSource.git_hub(
+                    "mvlbarcelos/poc-aws-lambda", 
+                    "setup",
+                    authentication=SecretValue.secrets_manager("github")
+                ),
+                commands=[
+                    "npm install -g aws-cdk",
+                    "python -m pip install -r requirements.txt",
+                    "cdk synth"
+                ]
+            )
+        )

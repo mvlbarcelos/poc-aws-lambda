@@ -14,6 +14,13 @@ CdkPocStack(app, "CdkPocStack",
     }
 )
 
+CdkPocStack(app, "CdkPocStack-Brazil",
+    env={
+        'account': '156161676080',
+        'region': 'sa-east-1',
+    }
+)
+
 PipelineStack(app, 'PipelineStack', env={
         'account': '156161676080',
         'region': 'eu-central-1',

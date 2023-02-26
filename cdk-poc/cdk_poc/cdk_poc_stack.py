@@ -17,16 +17,29 @@ class CdkPocStack(Stack):
         # The code that defines your stack goes here
         this_dir = path.dirname(__file__)
 
-        handler = lmb.Function(self, 'Handler',
+        handler_a = lmb.Function(self, 'HandlerA',
             runtime=lmb.Runtime.PYTHON_3_9,
             handler='handler.handler',
-            code=lmb.Code.from_asset(path.join(this_dir, 'lambda'))
+            code=lmb.Code.from_asset(path.join(this_dir, 'lambda_a'))
+        )
+
+        handler_b = lmb.Function(self, 'HandlerB',
+            runtime=lmb.Runtime.PYTHON_3_9,
+            handler='handler.handler',
+            code=lmb.Code.from_asset(path.join(this_dir, 'lambda_b'))
+        )
+
+        handler_c = lmb.Function(self, 'HandlerC',
+            runtime=lmb.Runtime.PYTHON_3_9,
+            handler='handler.handler',
+            code=lmb.Code.from_asset(path.join(this_dir, 'lambda_c'))
         )
 
         gw = apigw.LambdaRestApi(self, 'Gateway',
             description="POC CDK lambda",
-            handler=handler.current_version
+            handler=handler_a.current_version,
         )
+
 
         self.url_output = CfnOutput(self, 'Url',
             value=gw.url
